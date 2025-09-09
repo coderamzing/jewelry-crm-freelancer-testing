@@ -9,6 +9,7 @@
 // 4. User type for the relationships
 
 // Example structure (you need to complete this):
+
 /*
 export interface User {
   id: string
@@ -38,3 +39,40 @@ export interface CommunicationsError {
   error: string
 }
 */
+export interface User {
+  id: string
+  name: string
+  email: string
+  created_at: Date
+  updated_at: Date
+}
+
+export interface Communication {
+  id: string
+  message: string
+  sender_id: string | null
+  recipient_id: string | null
+  created_at: string
+  updated_at: string
+  recipient: User | null
+  sender: User | null
+}
+
+export interface CommunicationListResponse {
+  success: boolean
+  data: Communication[]
+}
+
+
+// 3. Error response types
+export interface CommunicationErrorResponse {
+  error: string
+  code: string
+  success: boolean
+}
+
+
+// 2. Function return type
+export type CommunicationListAPIResponse =
+  | CommunicationListResponse
+  | CommunicationErrorResponse

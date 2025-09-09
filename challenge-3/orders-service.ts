@@ -26,7 +26,7 @@ export class OrdersService {
     }
   
     // If data is undefined, return an empty array instead of undefined
-    return data;
+    return data ?? [];
   }
   
   async getOrderById(id: string): Promise<Order | null> {

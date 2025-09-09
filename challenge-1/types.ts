@@ -22,3 +22,42 @@ export interface UpdateCustomerCompanyError {
   // Define the error type here
 }
 */
+
+
+export interface Customer {
+  id: string
+  name: string
+  email: string
+  company: string
+  created_at: Date
+  updated_at: Date
+}
+
+// 1. Function parameter types
+export interface UpdateCustomerCompanyParams {
+  params: {
+    id: string
+  }
+}
+
+export interface UpdateCustomerCompanyRequestBody {
+  company: string
+}
+
+// 3. Error response types
+export interface UpdateCustomerCompanyErrorResponse {
+  error: string
+  code: string
+  success: boolean
+}
+
+// 4. Success response types
+export interface UpdateCustomerCompanySuccessResponse {
+  success: boolean
+  data: Customer
+}
+
+// 2. Function return type
+export type UpdateCustomerCompanyAPIResponse =
+  | UpdateCustomerCompanySuccessResponse
+  | UpdateCustomerCompanyErrorResponse

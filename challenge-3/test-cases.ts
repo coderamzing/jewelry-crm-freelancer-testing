@@ -264,6 +264,7 @@ describe('OrdersService', () => {
       await expect(ordersService.getOrderById('invalid-id')).rejects.toThrow('No order found with id: invalid-id')
       expect(console.error).toHaveBeenCalledWith('Error fetching order by id:invalid-id', 'The result contains 0 rows')
     })
+    
     test('should verify correct query parameters for getOrderById', async () => {
       const mockSingle = jest.fn().mockResolvedValue({
         data: null,

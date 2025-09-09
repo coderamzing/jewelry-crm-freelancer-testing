@@ -27,3 +27,37 @@ export interface AuthenticationError {
   status: number
 }
 */
+export interface User {
+  id: string
+  email: string
+}
+
+export interface ProtectedRouteResponse {
+  success: boolean
+  data?: any
+  error?: string
+}
+
+export interface AuthenticationError {
+  error: string
+  status: number
+}
+
+export interface AuthResponse {
+  success: boolean
+  data: User[]
+}
+
+
+// 3. Error response types
+export interface AuthErrorResponse {
+  error: string
+  code: string
+  success: boolean
+}
+
+
+// 2. Function return type
+export type AuthAPIResponse =
+  | AuthResponse
+  | AuthErrorResponse

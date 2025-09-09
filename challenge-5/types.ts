@@ -40,3 +40,32 @@ export interface OrderStatistics {
   statusCounts: Record<string, number>
 }
 */
+
+
+export interface OrderItem {
+  id: string
+  product_id: string
+  quantity: number
+  price: number
+}
+
+export interface Order {
+  id: string
+  customer_id: string
+  total_amount: number
+  status: string
+  items: OrderItem[]
+  created_at: string
+  updated_at: string
+}
+
+export interface OrderTotals {
+  totalRevenue: number
+  averageOrderValue: number
+  totalItems: number
+}
+
+export interface OrderStatistics {
+  totalOrders: number
+  statusCounts: Record<string, number>
+}

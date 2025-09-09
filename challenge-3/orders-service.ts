@@ -1,7 +1,8 @@
 // CHALLENGE 3: Fixed OrdersService
 // This file should contain your fixed service code
 
-import { createClient } from '@supabase/supabase-js'
+import {supabase} from '@/lib/supabase/server'
+import { Order } from './types'
 
 // TODO: Fix the OrdersService here
 // You need to:
@@ -12,19 +13,20 @@ import { createClient } from '@supabase/supabase-js'
 // 5. Add logging for debugging
 
 export class OrdersService {
-  private supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
 
   async getOrders(): Promise<Order[]> {
     // TODO: Fix this method
     const { data, error } = await supabase
       .from('orders')
-      .select('*')
-    
-    // This can be undefined, causing crashes
-    return data
+      .select('*');
+
+    if (error) {
+      console.error("Error fetching orders:", error.message);
+      return [];
+    }
+  
+    // If data is undefined, return an empty array instead of undefined
+    return data;
   }
   
   async getOrderById(id: string): Promise<Order | null> {
@@ -34,7 +36,15 @@ export class OrdersService {
       .select('*')
       .eq('id', id)
       .single()
-    
+
+    if (error) {
+      console.error("Error fetching order by id:" +id, error.message);
+      if(error.code === 'PGRST116'){
+        throw new Error('No order found with id: ' + id);
+      }
+      return null;
+    }
+
     // This can also be undefined
     return data
   }
